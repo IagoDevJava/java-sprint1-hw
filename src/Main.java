@@ -9,39 +9,44 @@ public class Main {
         int userInput = scanner.nextInt();
 
         while (userInput != 0) {
-            if (userInput == 1) {
-                System.out.println("Введите количество шагов:");
-                int countOfSteps = scanner.nextInt();
+            switch (userInput) {
+                case 1:
+                    System.out.println("Введите количество шагов:");
+                    int countOfSteps = scanner.nextInt();
+                    System.out.println("Введите номер месяца:");
+                    int numberOfMonth = scanner.nextInt();
+                    System.out.println("Введите номер дня:");
+                    int numberOfDay = scanner.nextInt();
+                    stepTracker.addCountOfStepsPerDay(numberOfMonth, numberOfDay, countOfSteps);
+                    if (countOfSteps >= stepTracker.getTargetOfSteps()) {
+                        System.out.println("Цель на день выполнена!");
+                    } else {
+                        System.out.println("В следующий попробуем приложить чуть больше усилий ;)");
+                    }
+                    break;
+                case 2:
+                    System.out.println("Введите номер месяца:");
+                    int numberMonth = scanner.nextInt();
+                    stepTracker.dataStatistics(numberMonth);
+                    break;
+                case 3:
+                    System.out.println("Введите новую цель на день:");
+                    int targetForDayNew = scanner.nextInt();
+                    stepTracker.setTargetOfSteps(targetForDayNew);
+                    break;
+                default:
+                    System.out.println("Такой команды не существует. Повторите ввод:");
 
-                System.out.println("Введите номер месяца:");
-                int numberOfMonth = scanner.nextInt();
-
-                System.out.println("Введите номер дня:");
-                int numberOfDay = scanner.nextInt();
-
-                stepTracker.addCountOfStepsPerDay(numberOfMonth, numberOfDay, countOfSteps);
-                if (countOfSteps >= stepTracker.getTargetOfSteps()) {
-                    System.out.println("Цель на день выполнена!");
-                } else {
-                    System.out.println("В следующий попробуем приложить чуть больше усилий ;)");
-                }
-            }
-            if (userInput == 2) {
-                System.out.println("Введите номер месяца:");
-                int numberOfMonth = scanner.nextInt();
-                stepTracker.dataStatistics(numberOfMonth);
-            }
-            if (userInput == 3) {
-                System.out.println("Введите новую цель на день:");
-                int targetForDayNew = scanner.nextInt();
-                stepTracker.setTargetOfSteps(targetForDayNew);
             }
             printMenu();
             userInput = scanner.nextInt();
         }
+
         System.out.println("Программа завершена");
+
     }
 
+    //Вывод на печать меню
     private static void printMenu() {
         System.out.println("Что вы хотите сделать?\n" +
                 "\t1 - Ввести количество шагов за определённый день;\n" +

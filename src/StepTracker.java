@@ -4,25 +4,25 @@ public class StepTracker {
     HashMap<Integer, MonthData> stepsForMonth = new HashMap<>();
     private int targetOfSteps = 10000;
 
+    // создание 12ти месяцев для работы с ними
     public StepTracker() {
         for (int i = 1; i <= 12; i++) {
             stepsForMonth.put(i, new MonthData());
         }
     }
 
+    // получение целевого значения количества шагов на день
     int getTargetOfSteps() {
         return targetOfSteps;
     }
 
+    // ввод нового целевого значения шагов в день
     void setTargetOfSteps(int targetOfSteps) {
         this.targetOfSteps = Math.abs(targetOfSteps);
     }
 
+    // вывод статистики за месяц
     void dataStatistics(int month) {
-        //todo
-        // В задании сказано, что если текущий день — первый в месяце, то вывод статистики должен работать корректно.
-        // Отсюда понимаю, что подразумевается несколько иной вид вывода статистики, но не понимаю какой именно.
-
         System.out.println("В этом месяце Вы прошли - " + stepsForMonth.get(month).getCountPerMonth());
         System.out.println("Количество пройденных шагов по дням:");
         stepsForMonth.get(month).getCountPerEachDay();
@@ -33,8 +33,13 @@ public class StepTracker {
         System.out.println("Лучшая серия за месяц - " + stepsForMonth.get(month).bestTrainingSeries(getTargetOfSteps()));
     }
 
+    // Добавление количества пройденных шагов за указаный день указанного месяца
     void addCountOfStepsPerDay(int month, int day, int count) {
-        stepsForMonth.get(month).setCountOfMonthData(day, count);
-        stepsForMonth.put(month, stepsForMonth.get(month));
+        if ((month > 0 && month <= 12) && (day > 0 && day <= 30) && (count > 0)) {
+            stepsForMonth.get(month).setCountOfMonthData(day, count);
+            stepsForMonth.put(month, stepsForMonth.get(month));
+        } else {
+            System.out.println("Проверьте ввод, значения некорректны.");
+        }
     }
 }
