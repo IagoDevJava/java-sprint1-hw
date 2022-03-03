@@ -38,6 +38,11 @@ public class StepTracker {
         if ((month > 0 && month <= 12) && (day > 0 && day <= 30) && (count > 0)) {
             stepsForMonth.get(month).setCountOfMonthData(day, count);
             stepsForMonth.put(month, stepsForMonth.get(month));
+            if (count >= getTargetOfSteps()) {
+                System.out.println("Цель на день выполнена!");
+            } else {
+                System.out.println("В следующий попробуем приложить чуть больше усилий ;)");
+            }
         } else {
             System.out.println("Проверьте ввод, значения некорректны.");
         }

@@ -5,10 +5,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         StepTracker stepTracker = new StepTracker();
 
-        printMenu();
-        int userInput = scanner.nextInt();
-
-        while (userInput != 0) {
+        // Переделать на while(true) - не проблема, а раньше я использовал for(;;) как бесконечный
+        // while (userInput != 0) предлагает сам Яндекс в подсказке и мне лично он понравился как раз тем,
+        // что уменьшает количество кода и убирает лишний case , оставляя при этом выбор в меню
+        while (true) {
+            printMenu();
+            int userInput = scanner.nextInt();
             switch (userInput) {
                 case 1:
                     System.out.println("Введите количество шагов:");
@@ -18,11 +20,6 @@ public class Main {
                     System.out.println("Введите номер дня:");
                     int numberOfDay = scanner.nextInt();
                     stepTracker.addCountOfStepsPerDay(numberOfMonth, numberOfDay, countOfSteps);
-                    if (countOfSteps >= stepTracker.getTargetOfSteps()) {
-                        System.out.println("Цель на день выполнена!");
-                    } else {
-                        System.out.println("В следующий попробуем приложить чуть больше усилий ;)");
-                    }
                     break;
                 case 2:
                     System.out.println("Введите номер месяца:");
@@ -34,16 +31,14 @@ public class Main {
                     int targetForDayNew = scanner.nextInt();
                     stepTracker.setTargetOfSteps(targetForDayNew);
                     break;
+                case 0:
+                    System.out.println("Программа завершена");
+                    return;
                 default:
                     System.out.println("Такой команды не существует. Повторите ввод:");
 
             }
-            printMenu();
-            userInput = scanner.nextInt();
         }
-
-        System.out.println("Программа завершена");
-
     }
 
     //Вывод на печать меню
